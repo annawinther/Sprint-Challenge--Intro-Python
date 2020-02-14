@@ -3,7 +3,6 @@
 # import os
 # os.chdir(f"{os.getcwd()}/src/cityreader")
 import csv
-import sys
 
 class City:
     def __init__(self, name, lat, lon):
@@ -36,8 +35,9 @@ def cityreader(cities=[]):
 
     with open('cities.csv') as csvDataFile:
       citiesreader = csv.reader(csvDataFile)
+      next(citiesreader)
       for row in citiesreader:
-        if row[0] != 'city':
+        # if row[0] != 'city':
             cities.append(City(str(row[0]), float(row[3]), float(row[4])))
         
       return cities
