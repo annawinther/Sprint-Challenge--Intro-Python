@@ -3,15 +3,17 @@
 # import os
 # os.chdir(f"{os.getcwd()}/src/cityreader")
 import csv
+import sys
 
 class City:
-  def __init__(self, name, lat, lon):
-    self.name = name
-    self.lat = lat
-    self.lon = lon
+    def __init__(self, name, lat, lon):
+          self.name = name
+          self.lat = lat
+          self.lon = lon
 
-  def __repr__(self):
-    return f"<City: {self.name}, {self.lat}, {self.lon}>"
+    def __repr__(self):
+            return f'City: {self.name}, Lat: {self.lat}, Lon: {self.lon}'
+
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
 #
@@ -31,19 +33,25 @@ def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-  with open('cities.csv') as csvDataFile:
-    citiesreader = csv.reader(csvDataFile)
-    for row in citiesreader:
-      # print('row', row[4])
-      if row[0] != 'city':
-          cities.append(City(str(row[0]), float(row[3]), float(row[4])))
-      # cities = City(row[:1], row[4:], row[8:])
-      # print('city', cities)
-    return cities
+
+    with open('cities.csv') as csvDataFile:
+      citiesreader = csv.reader(csvDataFile)
+      for row in citiesreader:
+        if row[0] != 'city':
+            cities.append(City(str(row[0]), float(row[3]), float(row[4])))
+        
+      return cities
+
+  #  with open('cities.csv', newline='') as csvfile:
+  #       data = csv.DictReader(csvfile, delimiter=',')
+  #       for row in data:
+  #           cities.append(City(row['city'], float(
+  #               row['lat']), float(row['lng'])))
+  #   return cities
 
 cityreader(cities)
 
-# Print the olist f cities (name, lat, lon), 1 record per line.
+# Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
     print(c)
 
